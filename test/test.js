@@ -43,4 +43,10 @@ describe("Common", function() {
     var str = parser.stringify(object);
     str.should.equal('<!ENTITY key1 "value1 with \\"text\\" test">\n<!ENTITY key2 "value2\'\'xxx">');
   });
+
+  it("should parse multi line entity", function() {
+    var raw = fs.readFileSync(__dirname + "/multi_line.dtd", "utf8");
+    var result = parser.parse(raw);
+    result["donate_message"].should.equal("multi\nline\ndtd");
+  });
 });
